@@ -1,1 +1,490 @@
-hi
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ตารางงาน 7-Eleven สาขา 3447 เขมราฐ 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Prompt:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#e31837;--red-dark:#b01228;--orange:#ff6900;--green:#006341;
+  --bg:#0f1520;--bg2:#16213e;--bg3:#0d1a30;--bg4:#1e2d45;
+  --border:#2a3a5c;--text:#e0e8f5;--muted:#7a8aaa;--faint:#3a4a6a;
+  --ch:#4db8ff;--ch-bg:#0d2a42;
+  --bo:#ff8c42;--bo-bg:#2a1800;
+  --dk:#a78bfa;--dk-bg:#1a1040;
+  --off-g:#4ade80;--off-g-bg:#0a1f0a;
+  --off-r:#f87171;--off-r-bg:#1f0a0a;
+  --leave:#fbbf24;--leave-bg:#1f1800;
+  --rider:#34d399;--rider-bg:#061a12;
+}
+html,body{min-height:100vh;background:var(--bg);font-family:'Sarabun',sans-serif;color:var(--text);}
+
+/* HEADER */
+.hdr{background:var(--red);padding:0;position:relative;overflow:hidden;}
+.hdr::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(255,255,255,0.05) 40px,rgba(255,255,255,0.05) 42px);}
+.hdr-in{display:flex;align-items:center;gap:1rem;padding:1rem 1.5rem;position:relative;z-index:1;flex-wrap:wrap;}
+.logo-box{background:#fff;border-radius:10px;padding:7px 14px;flex-shrink:0;box-shadow:0 2px 12px rgba(0,0,0,0.3);}
+.logo-text{font-family:'Prompt',sans-serif;font-size:1.5rem;font-weight:900;line-height:1;color:var(--red);}
+.logo-sub{font-size:0.52rem;color:#777;font-weight:600;letter-spacing:2px;display:block;margin-top:1px;}
+.hdr-info h1{font-family:'Prompt',sans-serif;font-size:1rem;font-weight:700;color:#fff;}
+.hdr-info p{font-size:0.75rem;color:rgba(255,255,255,0.85);margin-top:3px;}
+.stripe{height:9px;background:linear-gradient(90deg,var(--red) 33.33%,var(--orange) 33.33%,var(--orange) 66.66%,var(--green) 66.66%);}
+
+/* TOPBAR */
+.topbar{background:var(--bg3);border-bottom:1px solid var(--border);padding:0.55rem 1.5rem;display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;}
+.clock{font-family:'Prompt',sans-serif;font-size:1.05rem;font-weight:700;color:var(--ch);letter-spacing:2px;}
+.date-th{font-size:0.75rem;color:var(--muted);}
+.btn{background:var(--red);color:#fff;border:none;border-radius:7px;padding:5px 14px;font-family:'Sarabun',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:background 0.15s;}
+.btn:hover{background:var(--red-dark);}
+.pill{margin-left:auto;background:var(--bg4);border:1px solid var(--border);border-radius:20px;padding:3px 12px;font-size:0.7rem;color:var(--muted);}
+.pill.ok{border-color:#4ade8055;color:#4ade80;}
+.pill.err{border-color:#f8717155;color:#f87171;}
+
+/* SETUP BANNER */
+.setup-banner{background:#1a0f00;border:1px solid var(--orange);border-radius:10px;padding:1rem 1.2rem;margin:1rem 1.5rem;}
+.setup-banner h3{color:var(--orange);font-size:0.85rem;font-weight:700;margin-bottom:8px;}
+.setup-banner ol{padding-left:1.2rem;font-size:0.78rem;color:var(--muted);line-height:2;}
+.setup-banner code{background:var(--bg3);color:var(--ch);padding:1px 6px;border-radius:4px;font-size:0.75rem;}
+.setup-banner .url-box{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:8px 12px;margin:8px 0;font-size:0.72rem;color:var(--text);word-break:break-all;}
+.setup-banner input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:7px 10px;color:var(--text);font-family:'Sarabun',sans-serif;font-size:0.8rem;margin-top:6px;outline:none;}
+.setup-banner input:focus{border-color:var(--orange);}
+.setup-banner .save-btn{margin-top:8px;background:var(--orange);color:#fff;border:none;border-radius:6px;padding:7px 18px;font-family:'Sarabun',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;}
+
+/* TABS */
+.tab-nav{background:var(--bg3);padding:0.5rem 1.5rem;display:flex;gap:5px;overflow-x:auto;border-bottom:1px solid var(--border);}
+.tab-nav::-webkit-scrollbar{height:3px;}
+.tab-nav::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.tab-btn{flex-shrink:0;background:var(--bg4);color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:4px 11px;font-family:'Sarabun',sans-serif;font-size:0.7rem;cursor:pointer;white-space:nowrap;transition:all 0.15s;}
+.tab-btn:hover{color:var(--text);border-color:var(--orange);}
+.tab-btn.active{background:var(--red);color:#fff;border-color:var(--red);}
+
+/* CONTENT */
+.content{padding:1rem 1.5rem 2rem;}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:1rem;}
+.stat{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.65rem 0.9rem;}
+.stat .lbl{font-size:0.65rem;color:var(--muted);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;}
+.stat .val{font-size:1.25rem;font-weight:700;font-family:'Prompt',sans-serif;}
+.stat.ch .val{color:var(--ch);}
+.stat.bo .val{color:var(--bo);}
+.stat.dk .val{color:var(--dk);}
+.stat.tot .val{color:#4ade80;}
+
+/* PERIOD BAR */
+.period-bar{background:var(--bg4);border:1px solid var(--border);border-radius:10px;padding:0.55rem 1rem;margin-bottom:0.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.period-name{font-family:'Prompt',sans-serif;font-size:0.88rem;font-weight:700;color:var(--orange);}
+.period-sub{font-size:0.7rem;color:var(--muted);margin-top:2px;}
+.legend{display:flex;gap:8px;flex-wrap:wrap;}
+.leg{display:flex;align-items:center;gap:4px;font-size:0.65rem;color:var(--muted);}
+.leg-dot{width:9px;height:9px;border-radius:3px;}
+
+/* TABLE */
+.tbl-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:0.8rem;}
+.tbl-hdr{background:var(--bg3);padding:0.55rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+.tbl-hdr span{font-size:0.75rem;font-weight:600;color:var(--ch);}
+.tbl-scroll{overflow-x:auto;}
+.tbl-scroll::-webkit-scrollbar{height:4px;}
+.tbl-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+table{width:100%;border-collapse:collapse;font-size:0.77rem;min-width:580px;}
+thead tr{background:#0a1628;}
+th{padding:8px 6px;text-align:center;font-size:0.67rem;font-weight:600;color:var(--muted);border-bottom:2px solid var(--border);white-space:nowrap;}
+th.cn{text-align:left;padding-left:12px;min-width:135px;}
+th.cnote{text-align:left;min-width:90px;}
+th.td-col{color:var(--orange);background:#1a0e00;border-bottom-color:var(--orange);}
+td{padding:6px 6px;text-align:center;border-bottom:1px solid #1a2840;vertical-align:middle;}
+td.cn{text-align:left;padding-left:12px;font-weight:500;color:var(--text);}
+td.cnote{text-align:left;font-size:0.66rem;color:var(--muted);padding-left:6px;}
+td.td-col{background:rgba(255,105,0,0.07);}
+tr:last-child td{border-bottom:none;}
+tr:not(.grp):not(.sum):hover td{background:rgba(77,184,255,0.04);}
+.grp td{background:#0a1420;color:var(--orange);font-weight:700;font-size:0.7rem;padding:5px 12px;letter-spacing:0.5px;}
+.sum td{background:#080e1a;}
+.sum .cn{color:var(--muted);font-size:0.7rem;}
+.sv-ch{color:var(--ch);font-weight:700;}
+.sv-bo{color:var(--bo);font-weight:700;}
+.sv-dk{color:var(--dk);font-weight:700;}
+.rider td{background:#040f09;}
+.rider .cn{color:var(--rider);}
+.mgr .cn{color:#fbbf24;}
+
+/* BADGES */
+.badge{display:inline-block;border-radius:5px;padding:2px 8px;font-weight:700;font-size:0.72rem;min-width:28px;text-align:center;}
+.b-ch{background:var(--ch-bg);color:var(--ch);}
+.b-bo{background:var(--bo-bg);color:var(--bo);}
+.b-dk{background:var(--dk-bg);color:var(--dk);}
+.b-off{background:var(--off-g-bg);color:var(--off-g);}
+.b-offr{background:var(--off-r-bg);color:var(--off-r);font-size:0.62rem;}
+.b-leave{background:var(--leave-bg);color:var(--leave);font-size:0.62rem;}
+.b-t{background:var(--rider-bg);color:var(--rider);}
+.b-none{color:var(--faint);}
+
+/* NOTICE */
+.notice{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--orange);border-radius:0 10px 10px 0;padding:0.7rem 1rem;margin-bottom:0.8rem;}
+.notice h4{color:var(--orange);font-size:0.75rem;font-weight:700;margin-bottom:5px;}
+.notice p{font-size:0.73rem;color:var(--muted);line-height:1.65;margin-bottom:3px;}
+
+/* MSG */
+.msg{text-align:center;padding:3rem 1rem;}
+.spinner{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--red);border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 12px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.msg p{color:var(--muted);font-size:0.82rem;margin-bottom:8px;}
+.msg.err p{color:#f87171;}
+.msg-btn{background:var(--bg4);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 16px;font-family:'Sarabun',sans-serif;font-size:0.78rem;cursor:pointer;margin-top:4px;}
+
+/* FOOTER */
+.footer{text-align:center;color:var(--faint);font-size:0.65rem;padding:0.5rem;border-top:1px solid var(--border);margin-top:1rem;}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-in">
+    <div class="logo-box">
+      <div class="logo-text">7-Eleven</div>
+      <span class="logo-sub">ALWAYS OPEN</span>
+    </div>
+    <div class="hdr-info">
+      <h1>ตารางการทำงาน สาขา 3447 เขมราฐ 1</h1>
+      <p id="hdr-sub">กำลังโหลดข้อมูล...</p>
+    </div>
+  </div>
+</div>
+<div class="stripe"></div>
+
+<div class="topbar">
+  <div class="clock" id="clock">--:--:--</div>
+  <div class="date-th" id="dateth"></div>
+  <button class="btn" onclick="refreshTab()">↺ รีเฟรช</button>
+  <div class="pill" id="pill">กำลังโหลด...</div>
+</div>
+
+<!-- SETUP BANNER -->
+<div class="setup-banner" id="setup-banner">
+  <h3>⚙️ ตั้งค่า Google Apps Script (ทำครั้งเดียว)</h3>
+  <ol>
+    <li>เปิด Google Sheet → คลิกเมนู <code>Extensions</code> → <code>Apps Script</code></li>
+    <li>ลบโค้ดเดิมออกทั้งหมด แล้ววางโค้ดจากไฟล์ <code>Code.gs</code> ที่ได้รับ</li>
+    <li>คลิก <code>Deploy</code> → <code>New deployment</code> → เลือก <code>Web app</code></li>
+    <li>ตั้ง <code>Execute as</code>: <strong>Me</strong> และ <code>Who has access</code>: <strong>Anyone</strong></li>
+    <li>คลิก <code>Deploy</code> → คัดลอก <strong>Web app URL</strong> ที่ได้</li>
+    <li>วาง URL ด้านล่างแล้วกด <strong>บันทึกและโหลด</strong></li>
+  </ol>
+  <div style="margin-top:10px;">
+    <label style="font-size:0.75rem;color:var(--muted);">วาง Web App URL ที่นี่:</label>
+    <input type="text" id="api-url-input" placeholder="https://script.google.com/macros/s/XXXXXXXXXX/exec" />
+    <button class="save-btn" onclick="saveApiUrl()">✅ บันทึกและโหลด</button>
+  </div>
+</div>
+
+<div class="tab-nav" id="tab-nav" style="display:none"></div>
+
+<div class="content">
+  <div class="stats">
+    <div class="stat ch"><div class="lbl">☀️ กะเช้า (ช)</div><div class="val" id="s-ch">-</div></div>
+    <div class="stat bo"><div class="lbl">🌤 กะบ่าย (บ)</div><div class="val" id="s-bo">-</div></div>
+    <div class="stat dk"><div class="lbl">🌙 กะดึก (ด)</div><div class="val" id="s-dk">-</div></div>
+    <div class="stat tot"><div class="lbl">👥 พนักงานรวม</div><div class="val" id="s-tot">-</div></div>
+  </div>
+  <div id="main">
+    <div class="msg"><div class="spinner"></div><p>กำลังโหลดข้อมูล...</p></div>
+  </div>
+</div>
+
+<div class="footer">
+  ตารางงาน 7-Eleven สาขา 3447 เขมราฐ 1 · ผจก.อนิรุทธิ์ · ดูอย่างเดียว ไม่สามารถแก้ไขได้ · Real-time จาก Google Sheets
+</div>
+
+<script>
+// =========================================================
+// CONFIG — วาง Web App URL ที่ได้จาก Apps Script ตรงนี้
+// หรือกรอกในช่อง Setup Banner บนหน้าเว็บก็ได้
+// =========================================================
+let API_URL = localStorage.getItem('seven_api_url') || '';
+
+const MONTHS_TH = ['','มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const DAYS_TH   = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+
+let SHEETS = [];
+let curTab = 0;
+let cache  = {};
+
+// ===== CLOCK =====
+function tick(){
+  const n=new Date();
+  document.getElementById('clock').textContent=[n.getHours(),n.getMinutes(),n.getSeconds()].map(v=>String(v).padStart(2,'0')).join(':');
+  document.getElementById('dateth').textContent=`${DAYS_TH[n.getDay()]} ${n.getDate()} ${MONTHS_TH[n.getMonth()+1]} ${n.getFullYear()+543}`;
+}
+setInterval(tick,1000); tick();
+
+// ===== STATUS =====
+function setPill(msg,cls=''){
+  const el=document.getElementById('pill');
+  el.textContent=msg; el.className='pill'+(cls?' '+cls:'');
+}
+
+// ===== SAVE API URL =====
+function saveApiUrl(){
+  const v=document.getElementById('api-url-input').value.trim();
+  if(!v||!v.includes('script.google.com')){
+    alert('URL ไม่ถูกต้อง กรุณาวาง URL จาก Apps Script ที่ถูกต้อง');
+    return;
+  }
+  API_URL=v;
+  localStorage.setItem('seven_api_url',v);
+  document.getElementById('setup-banner').style.display='none';
+  document.getElementById('tab-nav').style.display='flex';
+  init();
+}
+
+// ===== JSONP FETCH =====
+function jsonp(url){
+  return new Promise((resolve,reject)=>{
+    const cb='cb_'+Date.now();
+    const script=document.createElement('script');
+    const timer=setTimeout(()=>{
+      delete window[cb];
+      script.remove();
+      reject(new Error('Timeout'));
+    },15000);
+    window[cb]=(data)=>{
+      clearTimeout(timer);
+      delete window[cb];
+      script.remove();
+      resolve(data);
+    };
+    script.src=url+(url.includes('?')?'&':'?')+'callback='+cb;
+    script.onerror=()=>{ clearTimeout(timer); delete window[cb]; script.remove(); reject(new Error('Script error')); };
+    document.head.appendChild(script);
+  });
+}
+
+// ===== INIT — โหลดรายชื่อ Sheet =====
+async function init(){
+  setPill('กำลังโหลดรายชื่อชีต...');
+  try{
+    const res=await jsonp(API_URL+'?sheet=__list__');
+    if(!res.ok) throw new Error(res.error);
+    SHEETS=res.sheets;
+    curTab=SHEETS.length-1;
+    buildTabs();
+    document.getElementById('tab-nav').style.display='flex';
+    document.getElementById('setup-banner').style.display='none';
+    loadTab(curTab);
+  }catch(e){
+    setPill('โหลดไม่สำเร็จ','err');
+    document.getElementById('main').innerHTML=`<div class="msg err">
+      <p>⚠️ เชื่อมต่อ API ไม่ได้: ${e.message}</p>
+      <p style="font-size:0.7rem">ตรวจสอบ Apps Script URL และสิทธิ์การเข้าถึง</p>
+      <button class="msg-btn" onclick="document.getElementById('setup-banner').style.display='block'">⚙️ ตั้งค่าใหม่</button>
+    </div>`;
+  }
+}
+
+// ===== BUILD TABS =====
+function buildTabs(){
+  document.getElementById('tab-nav').innerHTML=SHEETS.map((s,i)=>
+    `<button class="tab-btn${i===curTab?' active':''}" onclick="switchTab(${i})">${s.name}</button>`
+  ).join('');
+}
+
+// ===== SWITCH TAB =====
+function switchTab(idx){
+  curTab=idx; buildTabs(); loadTab(idx);
+}
+
+// ===== LOAD TAB =====
+async function loadTab(idx){
+  const sheet=SHEETS[idx];
+  if(!sheet) return;
+  if(cache[idx]){ renderAll(cache[idx],sheet.name); return; }
+  document.getElementById('main').innerHTML=`<div class="msg"><div class="spinner"></div><p>กำลังโหลด ${sheet.name}...</p></div>`;
+  setPill('กำลังโหลด...');
+  try{
+    const res=await jsonp(API_URL+'?sheet='+encodeURIComponent(sheet.name));
+    if(!res.ok) throw new Error(res.error);
+    const parsed=parseSheet(res.data,sheet.name);
+    cache[idx]=parsed;
+    renderAll(parsed,sheet.name);
+    setPill('อัปเดต '+new Date().toLocaleTimeString('th-TH'),'ok');
+  }catch(e){
+    document.getElementById('main').innerHTML=`<div class="msg err">
+      <p>⚠️ โหลดชีต "${sheet.name}" ไม่ได้: ${e.message}</p>
+      <button class="msg-btn" onclick="cache={};loadTab(${idx})">ลองใหม่</button>
+    </div>`;
+    setPill('โหลดไม่สำเร็จ','err');
+  }
+}
+
+// ===== PARSE SHEET =====
+function parseSheet(rows, sheetName){
+  if(!rows||rows.length<4) throw new Error('ข้อมูลไม่ครบ');
+  const r1=rows[0]||[], r2=rows[1]||[], r3=rows[2]||[];
+  
+  const period = String(r2[1]||r1[1]||sheetName).trim();
+  const dates  = r2.slice(2,9).map(v=>String(v).trim());
+  const days   = r3.slice(2,9).map(v=>String(v).trim());
+
+  const groups=[];
+  let curGroup=null, sumCh=[], sumBo=[], sumDk=[], rider=null, notices=[];
+
+  for(let i=3;i<rows.length;i++){
+    const row=rows[i]||[];
+    const name=String(row[1]||'').trim();
+    if(!name) continue;
+
+    if(name==='ผลัดเช้า'){curGroup={label:'☀️ ผลัดเช้า',rows:[]};groups.push(curGroup);continue;}
+    if(name==='ผลัดบ่าย'){curGroup={label:'🌤 ผลัดบ่าย',rows:[]};groups.push(curGroup);continue;}
+    if(name==='ผลัดดึก'){curGroup={label:'🌙 ผลัดดึก',rows:[]};groups.push(curGroup);continue;}
+    if(name==='เช้า'){sumCh=row.slice(2,9).map(v=>String(v).trim());continue;}
+    if(name==='บ่าย'){sumBo=row.slice(2,9).map(v=>String(v).trim());continue;}
+    if(name==='ดึก'){sumDk=row.slice(2,9).map(v=>String(v).trim());continue;}
+    if(name.includes('ไรเดอร์')){rider={name,shifts:row.slice(2,9).map(v=>String(v).trim())};continue;}
+    if(name.startsWith('อาจมีการ')||name.startsWith('พนักงาน')||name.startsWith('รับผิดชอบ')){
+      notices.push(String(name+' '+row.slice(2).join(' ')).trim()); continue;
+    }
+
+    const shifts=row.slice(2,9).map(v=>String(v).trim());
+    const note=String(row[9]||'').trim();
+
+    if(name.startsWith('ผจก')){
+      const mg=groups.find(g=>g.label.includes('ผู้จัดการ'));
+      if(mg) mg.rows.push({name,shifts,note});
+      else groups.unshift({label:'👔 ผู้จัดการ',rows:[{name,shifts,note}]});
+      continue;
+    }
+    if(curGroup) curGroup.rows.push({name,shifts,note});
+  }
+
+  return {period,dates,days,groups,sumCh,sumBo,sumDk,rider,notices};
+}
+
+// ===== BADGE =====
+function badge(v){
+  if(!v||v.trim()==='') return '<span class="b-none">–</span>';
+  const s=v.trim(), u=s.toUpperCase();
+  if(u==='ช') return `<span class="badge b-ch">ช</span>`;
+  if(u==='บ') return `<span class="badge b-bo">บ</span>`;
+  if(u==='ด') return `<span class="badge b-dk">ด</span>`;
+  if(u==='OFF') return `<span class="badge b-off">OFF</span>`;
+  if(u.startsWith('OFF')) return `<span class="badge b-offr">${s}</span>`;
+  if(u.includes('ลา')) return `<span class="badge b-leave">${s}</span>`;
+  if(u.startsWith('T')&&u.length<=5) return `<span class="badge b-t">${s}</span>`;
+  return `<span style="font-size:0.64rem;color:var(--muted)">${s}</span>`;
+}
+
+// ===== UPDATE STATS =====
+function updateStats(d){
+  const todayD=new Date().getDate();
+  const ti=d.dates.findIndex(v=>parseInt(v)===todayD);
+  let ch=0,bo=0,dk=0,tot=0;
+  d.groups.forEach(g=>g.rows.forEach(r=>{
+    if(!r.name.startsWith('ผจก')) tot++;
+    if(ti>=0){const s=(r.shifts[ti]||'').trim();if(s==='ช')ch++;else if(s==='บ')bo++;else if(s==='ด')dk++;}
+  }));
+  if(ti<0){ch=parseInt(d.sumCh[0])||0;bo=parseInt(d.sumBo[0])||0;dk=parseInt(d.sumDk[0])||0;}
+  document.getElementById('s-ch').textContent=ch||'-';
+  document.getElementById('s-bo').textContent=bo||'-';
+  document.getElementById('s-dk').textContent=dk||'-';
+  document.getElementById('s-tot').textContent=tot||'-';
+}
+
+// ===== RENDER ALL =====
+function renderAll(d, sheetName){
+  document.getElementById('hdr-sub').textContent=(d.period||sheetName)+' | '+sheetName;
+  updateStats(d);
+
+  const todayD=new Date().getDate();
+  const ti=d.dates.findIndex(v=>parseInt(v)===todayD);
+
+  let h='';
+
+  // Period bar
+  h+=`<div class="period-bar">
+    <div><div class="period-name">${d.period||sheetName}</div>
+    <div class="period-sub">วันที่ ${d.dates.filter(Boolean).join(', ')}</div></div>
+    <div class="legend">
+      <div class="leg"><div class="leg-dot" style="background:var(--ch)"></div>ช = เช้า</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--bo)"></div>บ = บ่าย</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--dk)"></div>ด = ดึก</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--off-g)"></div>OFF = หยุด</div>
+    </div>
+  </div>`;
+
+  // Table
+  h+=`<div class="tbl-wrap"><div class="tbl-hdr">
+    <span>📋 ตารางกะพนักงาน</span>
+    <span style="color:var(--muted);font-size:0.68rem">ดูอย่างเดียว · ไม่สามารถแก้ไขได้</span>
+  </div><div class="tbl-scroll"><table><thead><tr>
+    <th class="cn">ชื่อพนักงาน</th>`;
+  d.dates.forEach((dt,i)=>{
+    const it=i===ti;
+    h+=`<th class="${it?'td-col':''}">${dt||''}<br><span style="font-weight:400;font-size:0.6rem">${d.days[i]||''}</span></th>`;
+  });
+  h+=`<th class="cnote">หมายเหตุ</th></tr></thead><tbody>`;
+
+  // Rows
+  d.groups.forEach(g=>{
+    h+=`<tr class="grp"><td colspan="9">▸ ${g.label}</td></tr>`;
+    g.rows.forEach(r=>{
+      const isMgr=r.name.startsWith('ผจก');
+      h+=`<tr class="${isMgr?'mgr':''}"><td class="cn">${r.name}</td>`;
+      r.shifts.forEach((s,i)=>{ h+=`<td class="${i===ti?'td-col':''}">${badge(s)}</td>`; });
+      h+=`<td class="cnote">${r.note||''}</td></tr>`;
+    });
+  });
+
+  // Rider
+  if(d.rider){
+    h+=`<tr class="grp"><td colspan="9">▸ 🛵 ไรเดอร์</td></tr>`;
+    h+=`<tr class="rider"><td class="cn">${d.rider.name}</td>`;
+    d.rider.shifts.forEach((s,i)=>{ h+=`<td class="${i===ti?'td-col':''}">${badge(s)}</td>`; });
+    h+=`<td class="cnote"></td></tr>`;
+  }
+
+  // Summary
+  if(d.sumCh.length||d.sumBo.length||d.sumDk.length){
+    [
+      {label:'รวมกะเช้า',arr:d.sumCh,cls:'sv-ch'},
+      {label:'รวมกะบ่าย',arr:d.sumBo,cls:'sv-bo'},
+      {label:'รวมกะดึก',arr:d.sumDk,cls:'sv-dk'},
+    ].forEach(({label,arr,cls})=>{
+      h+=`<tr class="sum"><td class="cn">${label}</td>`;
+      arr.forEach((v,i)=>{ h+=`<td class="${cls}${i===ti?' td-col':''}">${v||'-'}</td>`; });
+      h+=`<td class="cnote"></td></tr>`;
+    });
+  }
+
+  h+=`</tbody></table></div></div>`;
+
+  // Notices
+  if(d.notices&&d.notices.length){
+    h+=`<div class="notice"><h4>📌 ประกาศ / หมายเหตุ</h4>`;
+    d.notices.forEach(n=>{ h+=`<p>${n}</p>`; });
+    h+=`</div>`;
+  }
+
+  document.getElementById('main').innerHTML=h;
+}
+
+// ===== REFRESH =====
+function refreshTab(){ cache={}; loadTab(curTab); }
+
+// ===== AUTO REFRESH 5 min =====
+setInterval(()=>{ cache={}; loadTab(curTab); },5*60*1000);
+
+// ===== INIT =====
+if(API_URL){
+  document.getElementById('setup-banner').style.display='none';
+  document.getElementById('tab-nav').style.display='flex';
+  document.getElementById('api-url-input').value=API_URL;
+  init();
+} else {
+  document.getElementById('main').innerHTML='';
+  setPill('รอการตั้งค่า...');
+}
+</script>
+</body>
+</html>
